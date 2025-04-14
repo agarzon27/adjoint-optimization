@@ -1,0 +1,3 @@
+#define BLOCK_SIZE_X 16
+#define BLOCK_SIZE_Y 16
+#define BLOCK_SIZE_XY ((BLOCK_SIZE_X)*(BLOCK_SIZE_Y))

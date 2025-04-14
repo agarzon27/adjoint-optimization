@@ -1,0 +1,15 @@
+% -*-octave-*-
+alpha=0.5; % weight of electric field integral
+ds=1e-3; % pseudo-time step duration
+ns=200; % total number of pseudo-time steps
+final_time=300;
+gamma = [1, 0.2, 0.2]; % weights of gradients of variables
+nmod = 50;
+Et_seed_file = 'Et_pulse_N_1_E0_5.00_t0_20.0_300ms.mat';
+icondfile = 'spirals.mat';
+grid_file = 'lap_Cfile_2nd_order_grad_dx_0p035_N_256_hole_dens_16.mat';
+S_file = 'S_1o4_N_256_hole_dens_16.mat';
+mex_function = @fk_grad_Et_mex;
+in_path = './data/';
+out_path = './data/';
+jobid = '000001';

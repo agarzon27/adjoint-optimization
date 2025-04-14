@@ -1,0 +1,11 @@
+% -*-octave-*-
+Et_file = 'Et_pulse_N_1_E0_5.00_t0_20.0_300ms.mat';
+final_time = 200; % ignored, unless Et_file is the empty string
+nstep = 100;
+icondfile = 'spirals.mat';
+outfile = ''; % make empty to enable use of outfile_prefix
+outfile_prefix = 'ys_mex_';
+mex_function = @fk_forward_Et_mex;
+grid_file = 'lap_Cfile_2nd_order_grad_dx_0p035_N_256_hole_dens_16.mat';
+in_path = './data/';
+out_path = './data/';

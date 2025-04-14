@@ -1,0 +1,330 @@
+% ****** Start of file apssamp.tex ******
+%
+%   This file is part of the APS files in the REVTeX 4.2 distribution.
+%   Version 4.2a of REVTeX, December 2014
+% 
+%   Copyright (c) 2014 The American Physical Society.
+%
+%   See the REVTeX 4 README file for restrictions and more information.
+%
+% TeX'ing this file requires that you have AMS-LaTeX 2.0 installed
+% as well as the rest of the prerequisites for REVTeX 4.2
+%
+% See the REVTeX 4 README file
+% It also requires running BibTeX. The commands are as follows:
+%
+%  1)  latex apssamp.tex
+%  2)  bibtex apssamp
+%  3)  latex apssamp.tex
+%  4)  latex apssamp.tex
+%
+% \documentclass[%
+% reprint,
+% %superscriptaddress,
+% %groupedaddress,
+% %unsortedaddress,
+% %runinaddress,
+% %frontmatterverbose, 
+% %preprint,
+% %preprintnumbers,
+% %nofootinbib,
+% %nobibnotes,
+% %bibnotes,
+%  amsmath,amssymb,
+%  aps,
+% %pra,
+% %prb,
+% %rmp,
+% %prstab,
+% %prstper,
+% %floatfix,
+% ]{revtex4-2}
+% \documentclass[twocolumn]{article}
+\documentclass{article}
+\synctex=-1
+
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\usepackage{graphicx}% Include figure files
+% \usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+% \usepackage{diagbox}
+% \usepackage{booktabs}
+% \usepackage{tabularx}
+% \usepackage[ruled,linesnumbered]{algorithm2e}
+% %\usepackage{algpseudocode}
+% %\usepackage{algorithmic}
+% \usepackage{dblfloatfix}
+% \usepackage{multirow}
+% \usepackage{threeparttable}
+\usepackage[colorlinks]{hyperref}
+\hypersetup{
+    colorlinks = true,
+    linkcolor=blue
+  }
+% \usepackage[table]{xcolor}
+% \usepackage{makecell}
+  
+%\usepackage{siunitx}
+%\usepackage{hyperref}% add hypertext capabilities
+%\usepackage[mathlines]{lineno}% Enable numbering of text and display math
+%\linenumbers\relax % Commence numbering lines
+
+%\usepackage[showframe,%Uncomment any one of the following lines to test 
+%%scale=0.7, marginratio={1:1, 2:3}, ignoreall,% default settings
+%%text={7in,10in},centering,
+%%margin=1.5in,
+%%total={6.5in,8.75in}, top=1.2in, left=0.9in, includefoot,
+%%height=10in,a5paper,hmargin={3cm,0.8in},
+%]{geometry}
+
+\newcommand{\tp}{\mathsf{T}}
+% \newcommand{\wt}[1]{\widetilde{#1}}
+% \newcommand{\wh}[1]{\widehat{#1}}
+% \newcolumntype{Y}{>{\centering\arraybackslash}X}
+% \newcolumntype{C}{>{\centering\arraybackslash}p{1.6cm}}
+% \newcolumntype{D}{>{\centering\arraybackslash}p{1cm}}
+% \newcolumntype{E}{>{\centering\arraybackslash}p{3cm}}
+
+% \newcolumntype{F}[1]{>{\centering\arraybackslash}p{#1}}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+
+\usepackage{color,listings}
+\lstset{breaklines=true,breakindent=0pt,
+  prebreak=\mbox{\tiny$\searrow$},
+  postbreak=\mbox{{\color{blue}\tiny$\rightarrow$}}}
+
+% \newcommand{\code}[1]{{\small\texttt{#1}}}
+
+\definecolor{darkgray}{rgb}{0.66, 0.66, 0.66}
+\definecolor{darkorange}{rgb}{1.0, 0.55, 0.0}
+% \definecolor{gray}{rgb}{0.97,0.97,0.99}
+\definecolor{gray}{rgb}{0.9,0.9,0.9}
+\definecolor{teal}{rgb}{0.0, 0.5, 0.5}
+\definecolor{comment}{rgb}{0.6, 0, 0.9}
+\lstdefinestyle{mystyle}{
+%	language = Python,
+	backgroundcolor=\color{gray},
+	commentstyle=\color{comment},
+	keywordstyle=\bfseries\color{darkorange},
+	numberstyle=\scriptsize\color{darkgray},
+	stringstyle=\color{teal},
+	% basicstyle=\scriptsize\ttfamily,%\linespread{1}
+	basicstyle=\ttfamily,%\linespread{1}
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=t,
+	keepspaces=false,
+	% numbers=left,
+	numbersep=3pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=4
+}
+\lstset{style=mystyle}
+
+\newcommand{\code}[1]{\colorbox{gray}{\lstinline|#1|}}
+
+\begin{document}
+
+%\preprint{APS/123-QED}
+
+\title{A set of MATLAB-CUDA programs to find low-energy defibrillating signals by adjoint optimization}
+\author{First Author}
+ % \altaffiliation[Also at ]{Physics Department, XYZ University.}%Lines break automatically or can be forced with \\
+\author{Alejandro Garz\'on}%
+%  \email{Second.Author@institution.edu}
+% \affiliation{%
+%  Authors' institution and/or address
+% }%
+
+\date{\today}% It is always \today, today,
+             %  but any date may be explicitly specified
+
+%\keywords{Suggested keywords}%Use showkeys class option if keyword
+                              %display desired
+\maketitle
+\begin{abstract}
+  This document explains the compilation and operation of a set of MATLAB-CUDA programs for finding low-energy defibrillating signals in electrophysiological models. The programs implement the procedure explained in Refs. \cite{garzon2024ultra,garzon2024chaos}, based on the minimization of a functional of the signal, defined over the model solution. The optimization is performed by the gradient descent approach, with the functional gradient computed efficiently by the adjoint method.
+\end{abstract}
+
+
+% \tableofcontents
+\section{Method description}
+References \cite{garzon2024ultra,garzon2024chaos} present a method for finding low-energy electric field signals $E(t)$ capable of producing defibrillation in electrophysiological models of two-dimensional cardiac tissue. The method is based on the minimization of a functional $\mathcal{L}$ of $E(t)$,
+\begin{equation}
+  \label{eq:LNM}
+      \mathcal{L} = \frac{1}{2}\mathcal{M} + \frac{\alpha}{2}\mathcal{N},
+\end{equation}
+that penalizes the energy $\mathcal{N}$ of $E(t)$ and the spatial variation $\mathcal{M}$ of the model state variables at a given time $T$. $\mathcal{L}[E(t)]$ is minimized by the gradient descent approach with the functional gradient $\mathcal{G}(t)$ computed efficiently by the adjoint method. To explain the installation and operation of the software that computes the optimal $E(t)$, a sketchy presentation of the method equations follows (the full details can be found in Ref. \cite{garzon2024ultra}).
+
+After space discretization, the model's partial differential equations become a system of ordinary differential equations (ODEs), with a huge number of state variables, in the order of tens of thousands. If the state variables are gathered in a vector ${\bf w}$, the ODE system takes the form
+\begin{equation}
+  \label{eq:1}
+  \dot{\bf w} = L{\bf w} + F({\bf w}) + E(t){\bf b}.  
+\end{equation}
+% \begin{subequations}
+% \label{eq:main_ivp_bfu}
+% \begin{align}
+%   \label{eq:main_dot_bfu}
+%   \dot{\bf w} &= L{\bf w} + F({\bf w}) + E{\bf b},\\
+%   \label{eq:main_dot_bfuT}
+%   {\bf w}(0) &= {\bf w}_0,
+% \end{align}
+% \end{subequations}
+To compute the solution ${\bf w}(t)$ quickly, the numerical algorithms were programmed in CUDA C++ language for parallel execution on general-purpose graphics processing units (GPUs). For ease of use, the CUDA program was then wrapped in a MATLAB mex-function.
+
+The functional gradient $\mathcal{G}(t)$ is computed as
+\begin{align}
+   \mathcal{G}(t) = \alpha E(t) + {\bf b}^\tp\bm{\lambda}(t),
+\end{align}
+where $\bm{\lambda}$ is a Lagrange multiplier that obeys the {\it adjoint equations}
+\begin{subequations}
+  \label{eq:main_ivp_lamb}
+  \begin{align}
+    \label{eq:main_dot_lamb}
+    -\dot{\bm{\lambda}} &= (L+J_F)^\tp \bm{\lambda}, \\
+    \label{eq:main_lambT}
+    \bm{\lambda}(T) &= R{\bf w}(T).
+  \end{align}
+\end{subequations}
+The ODE system \eqref{eq:main_dot_lamb} has as many variables as the system \eqref{eq:1}. Hence, for efficiency, the numerical solution of \eqref{eq:main_dot_lamb} was programmed in CUDA C++ language and wrapped in a MATLAB mex-function too.
+
+
+Given a signal $E_s(t)$, the gradient descent method utilizes the functional gradient to produce an improved signal $E_{s+\Delta s}(t)$ using
+\begin{align}
+  \label{eq:grad_desc}
+  E_{s+\Delta s}(t) = E_s(t) - \Delta s\, \mathcal{G}(t)|_{E_s(t)}.
+  \end{align}
+  More exactly, for small enough $\Delta s$, the new signal $E_{s+\Delta s}(t)$ reduces $\mathcal{L}$,
+  \begin{equation*}
+    \mathcal{L}[E_{s+\Delta s}(t)] < \mathcal{L}[E_s(t)].
+  \end{equation*}
+  Therefore, iteration of \eqref{eq:grad_desc} generates a sequence of signals $\{E_s(t), E_{s'}(t), E_{s''}(t),\ldots\}$ that converges to one of many local minima of $\mathcal{L}$. Some of such minima correspond to low-energy defibrillating signals $E(t)$.
+
+The next section describes the installation and operation of the programs that solve Eq. \eqref{eq:1} and perform the gradient descent iteration \eqref{eq:grad_desc}.
+  
+%The software suite includes the program \code{plot_Et_and_save_fk_forward_Et_mex_scratch.m} that computes the solution ${\bf w}(t)$ of \eqref{eq:1} and saves it to a file. Another program, \code{simple_grad_desc_cuda_phoenix_3.m}, executes the gradient descent iteration \eqref{eq:grad_desc} and stores the sequence of signals $\{E_s(t), E_{s'}(t), E_{s''}(t),\ldots\}$ in files. The installation and operation of these programs are described next.
+
+\section{Software compilation and operation}
+The following instructions are to be executed in a Linux operating system. They include Linux commands, identified with the prompt \code{\$}, and MATLAB commands, starting with \code{>>}.
+Copy the file \code{adjoint_optimization.tar.gz} to a directory in your machine where you would like to keep the programs. Expand the file with
+\begin{lstlisting}
+$ tar -xzvf adjoint_optimization.tar.gz
+\end{lstlisting}
+This creates the directory \code{adjoint_optimization} containing the MATLAB scripts (extension \code{.m}) and the source code of the mex-functions.
+
+\subsection{Forward evolution equation}
+The script \code{save_fk_forward_Et.m} computes the solution ${\bf w}(t)$ of the forward evolution equation \eqref{eq:1} and saves it to a file. This program calls the mex-function \code{fk_forward_Et_mex},
+which must be generated by compilation of the source files, using
+\begin{lstlisting}
+>>  mexcuda -output fk_forward_Et_mex fk_forward_Et_param_mex.cpp fk_forward_Et_mono_PARAMETERS.cu
+\end{lstlisting}
+The function \code{mexcuda} executes  the CUDA compiler \code{nvcc} from either the CUDA toolkit installed with MATLAB or a system-wide CUDA toolkit.
+
+\code{save_fk_forward_Et.m} reads input data from the file \code{infile_forward}. An example of this file in displayed in Listing \ref{code:infile}. It contains MATLAB-style assignments and accepts MATLAB-style comments, starting with \code{\%}. Table \ref{tab:input} explains the meaning of the input variables. The example input files referred to in Listing \ref{code:infile} are provided in directory \code{adjoint_optimization/data}.
+
+%%%%% LSTINPUTLISTING %%%%%%%%%%
+\lstinputlisting[firstline=2, caption=Input file \code{infile_forward} for \code{save_fk_forward_Et.m}, label=code:infile]{../src/infile_forward} 
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|l|p{10cm}|}
+    \hline
+    {\bf Variable} & {\bf Description} \\ \hline
+    \code{Et_file} & File with $E(t)$ in ${\rm dV}/{\rm cm}$. The script also reads from this file the final time $T$. If set to the empty string, the script assumes $E(t) = 0$. \\ \hline
+    \code{final_time} & Final time $T$  in milliseconds. Ignored, unless \code{Et_file} is the empty string. \\ \hline
+    \code{nstep} & Number of time steps at which ${\bf w}(t)$ is saved. \\ \hline
+    \code{icondfile} & File with initial tissue state ${\bf w}_0$, ${\bf w}(0) = {\bf w}_0$. \\ \hline
+    \code{outfile} & File where ${\bf w}(t)$ will be saved. Set to the empty string to enable the use of \code{outfile_prefix}. \\ \hline
+    \code{outfile_prefix} & If \code{outfile} is the empty string, the name of the file where ${\bf w}(t)$ will be saved is composed as the concatenation of  \code{outfile_prefix} and \code{Et_file}.\\ \hline
+    \code{mex_function} & mex-function that computes ${\bf w}(t)$.\\ \hline
+    \code{grid_file} & File with distribution of non-conducting patches in the tissue.\\ \hline
+    \code{in_path} & Directory where input files are read from.\\ \hline
+    \code{out_path} & Directory where output files are saved to.\\ \hline
+  \end{tabular}
+  \caption{Meaning of variables in Listing \ref{code:infile}.}
+  \label{tab:input}
+\end{table}
+The script is executed by simply typing its name (without the extension) at the MATLAB prompt
+\begin{lstlisting}
+>> save_fk_forward_Et
+\end{lstlisting}
+which, for the given input variables, creates the output file \code{ys_mex_Et_pulse_N_1_E0_5.00_t0_20.0_300ms.mat} containing the solution ${\bf w}(t)$. This solution is plotted by the script \code{plot_ys.m}, described in Sec. \ref{sec:plotting}.
+
+
+
+\subsection{Gradient descent}
+The script \code{simple_grad_desc.m} performs the gradient descent iteration \eqref{eq:grad_desc} to generate the sequence of electric field signals $\{E_s(t), E_{s'}(t), E_{s''}(t),\ldots\}$. To compute the functional gradient, the program calls the mex-function \code{fk_grad_Et_mex}, which solves the systems of equations \eqref{eq:1} and \eqref{eq:main_dot_lamb}. This mex-function is generated by compilation of the source files using
+\begin{lstlisting}
+>> mexcuda -output fk_grad_Et_mex fk_grad_Et_param_mex.cpp  fk_grad_Et_mono_PARAMETERS.cu
+\end{lstlisting}
+
+Every time a  batch of certain number of iterations (set through the input variable \code{nmod}) is completed, the program saves to a file the values of $\mathcal{L}$, $\mathcal{N}$, and $\mathcal{M}$ for each iteration in the batch and $E_s(t)$ for the final iteration. The output filename is created as a concatenation of the following: (i) the string \code{simple_grad_desc_step_}, (ii) a string with the date at execution time, (iii) the string in the input variable \code{jobid} (which could be the job ID, if the script is executed in batch mode), (iv) the number of gradient descent iterations so far, and (v) the extension \code{.mat}. For instance \code{simple_grad_desc_step_2024-nov-02-17-32-50_000001_50.mat}.
+
+\code{simple_grad_desc.m} reads input data from the file \code{infile_grad}. An example of this file in displayed in Listing \ref{code:infile_grad}. Table \ref{tab:input_grad} explains the meaning of the input variables.
+%%%%% LSTINPUTLISTING %%%%%%%%%%
+\lstinputlisting[firstline=2, caption=Example input file \code{infile_grad} for \code{simple_grad_desc.m}, label=code:infile_grad]{../src/infile_grad}
+
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|l|p{10cm}|}
+    \hline
+    {\bf Variable} & {\bf Description} \\ \hline
+\code{alpha} & Value of parameter $\alpha$ in Eq. \eqref{eq:LNM} in units of ${\rm cm}^2/({\rm dV}^2\,{\rm ms})$\\ \hline
+\code{ds} & Value of $\Delta s$ in Eq. \eqref{eq:grad_desc} in units of $({\rm dV}/{\rm cm})^2$\\ \hline
+\code{ns} & Number of iterations of the recurrence relation in Eq. \eqref{eq:grad_desc}\\ \hline
+\code{final_time} & Final time $T$  in milliseconds.\\ \hline
+\code{gamma} & Vector $(\gamma_1, \gamma_2, \gamma_3)$ used in the computation of $\mathcal{M}$ in Eq. \eqref{eq:LNM} \\ \hline
+\code{nmod} & Number of iterations of Eq. \eqref{eq:grad_desc} at which $\mathcal{L},\mathcal{N},\mathcal{M}$ and $E_s(t)$ are saved to a file\\ \hline
+\code{Et_seed_file} & File with initial electric field signal $E_0(t)$ in ${\rm dV}/{\rm cm}$.\\ \hline
+\code{icondfile} & File with initial tissue state ${\bf w}_0$, ${\bf w}(0) = {\bf w}_0$.\\ \hline
+\code{grid_file} & File with distribution of non-conducting patches in the tissue. \\ \hline
+\code{S_file} & File with matrices used in the computation of $\mathcal{M}$. \\ \hline
+\code{mex_function} & mex-function that computes the functional gradient $\mathcal{G}(t)$. \\ \hline
+\code{in_path} & Directory where input files are read from.\\ \hline
+\code{out_path} & Directory where output files are saved to.\\ \hline
+\code{jobid} & String included in the name of the output files. \\ \hline
+  \end{tabular}
+  \caption{Meaning of the variables in Listing \ref{code:infile_grad}.}
+  \label{tab:input_grad}
+\end{table}
+
+The script is executed by typing its name at the MATLAB prompt,
+\begin{lstlisting}
+>> simple_grad_desc
+\end{lstlisting}
+The script \code{plot_LMN.m}, described in Sec. \ref{sec:plotting}, plots the data of some example output files.
+
+\subsection{Plotting scripts}
+\label{sec:plotting}
+The following scripts plot the results of \code{save_fk_forward_Et.m} and \code{simple_grad_desc.m}.
+
+\begin{itemize}
+\item \code{plot_ys.m}: reads ${\bf w}(t)$ from a file written by \code{save_fk_forward_Et.m} and plots the voltage variable on the two-dimensional domain for several times. The file read by the script must be created by execution of \code{save_fk_forward_Et.m} with the provided input data. %The plot of the initial state is shown in Fig. \ref{}
+%   \begin{figure}[h]
+%   \centering
+%   \includegraphics[width=10cm]{spirals.jpg}
+%   \caption{Initial voltage state.}
+% \end{figure}
+
+
+  
+\item \code{plot_LMN.m}: reads a group of files written by \code{simple_grad_desc.m} and plots $\mathcal{L}, \mathcal{N}$ and $\mathcal{M}$ as functions of $s$ and the final electric field signal $E_s(t)$. The example files read by the script are provided in directory \code{adjoint_optimization/data}.
+
+\end{itemize}
+
+\section{Test}
+This software has been tested with MATLAB Release R2021a using the \code{nvcc} compiler installed with MATLAB, on an NVIDIA Tesla V100 PCIe 16 GB GPU.
+
+% \bibliographystyle{plain}
+% \bibliographystyle{abbrv}
+\bibliographystyle{plainurl}
+\bibliography{references}
+%%% -------------------- END DOCUMENT -------------------------
+\end{document}
+
+%
