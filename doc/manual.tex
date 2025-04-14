@@ -62,7 +62,7 @@
     colorlinks = true,
     linkcolor=blue
   }
-% \usepackage[table]{xcolor}
+\usepackage[table]{xcolor}
 % \usepackage{makecell}
   
 %\usepackage{siunitx}
@@ -209,12 +209,12 @@ The next section describes the installation and operation of the programs that s
 %The software suite includes the program \code{plot_Et_and_save_fk_forward_Et_mex_scratch.m} that computes the solution ${\bf w}(t)$ of \eqref{eq:1} and saves it to a file. Another program, \code{simple_grad_desc_cuda_phoenix_3.m}, executes the gradient descent iteration \eqref{eq:grad_desc} and stores the sequence of signals $\{E_s(t), E_{s'}(t), E_{s''}(t),\ldots\}$ in files. The installation and operation of these programs are described next.
 
 \section{Software compilation and operation}
-The following instructions are to be executed in a Linux operating system. They include Linux commands, identified with the prompt \code{\$}, and MATLAB commands, starting with \code{>>}.
+{\color{red}CORRECT THIS: The following instructions are to be executed in a Linux operating system. They include Linux commands, identified with the prompt \code{\$}, and MATLAB commands, starting with \code{>>}.
 Copy the file \code{adjoint_optimization.tar.gz} to a directory in your machine where you would like to keep the programs. Expand the file with
 \begin{lstlisting}
 $ tar -xzvf adjoint_optimization.tar.gz
 \end{lstlisting}
-This creates the directory \code{adjoint_optimization} containing the MATLAB scripts (extension \code{.m}) and the source code of the mex-functions.
+This creates the directory \code{adjoint_optimization} containing the MATLAB scripts (extension \code{.m}) and the source code of the mex-functions.}
 
 \subsection{Forward evolution equation}
 The script \code{save_fk_forward_Et.m} computes the solution ${\bf w}(t)$ of the forward evolution equation \eqref{eq:1} and saves it to a file. This program calls the mex-function \code{fk_forward_Et_mex},
